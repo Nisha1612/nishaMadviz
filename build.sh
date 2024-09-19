@@ -2,10 +2,12 @@
 # exit on error
 set -o errexit
 
-# Ensure python and pip are installed
+# Install python and pip if they aren't available
+apt-get update && apt-get install -y python3 python3-pip
+
+# Ensure python and pip are available
 python3 --version
-python3 -m ensurepip --upgrade
-python3 -m pip install --upgrade pip
+pip3 --version
 
 # Install dependencies
 pip3 install -r requirements.txt
