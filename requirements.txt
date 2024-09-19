@@ -16,13 +16,4 @@ django-cors-headers==3.7.*
 django-crispy-forms==1.11.*
 django-bootstrap4==1.1.*
 loguru==0.5.*
-
-# Remove the following as they're not Python packages:
-# tailwindcss
-# gsap
-# vanilla-tilt
-# font-awesome
-
-# For spacy model:
-# You need to download this in your build process, not in requirements.txt
-# python -m spacy download en_core_web_sm
+gunicorn==20.1.0
