@@ -2,17 +2,18 @@
 # exit on error
 set -o errexit
 
-# Ensure pip is installed and Python version is correct
-python3.10 -m venv venv
-source venv/bin/activate
+# Ensure python and pip are installed
+python3 --version
+python3 -m ensurepip --upgrade
+python3 -m pip install --upgrade pip
 
-# Install the dependencies
-pip install -r requirements.txt
+# Install dependencies
+pip3 install -r requirements.txt
 
 # Collect static files for Django
-python manage.py collectstatic --no-input
+python3 manage.py collectstatic --no-input
 
-# Optionally create superuser if the environment variable is set
+# Optionally create superuser if environment variable is set
 if [[ $CREATE_SUPERUSER ]]; then
-  python manage.py createsuperuser --no-input
+  python3 manage.py createsuperuser --no-input
 fi
