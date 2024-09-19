@@ -2,14 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "build.sh",
-      "use": "@vercel/python",
-      "config": { "runtime": "python3.10" }
-    },
-    {
       "src": "frontend/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "runtime": "python3.10" }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
