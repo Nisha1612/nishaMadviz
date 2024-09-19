@@ -16,7 +16,7 @@ DEBUG = True
 PORT = int(os.environ.get('PORT', 8000))
 
 
-ALLOWED_HOSTS = [.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
