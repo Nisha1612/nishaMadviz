@@ -9,18 +9,22 @@ tensorflow>=2.4.0
 speechrecognition>=3.8.1
 PyPDF2>=1.26.0
 transformers>=4.0.0
-spacy>=2.3.5
-fitz==0.0.1.dev2  # PyMuPDF wrapper
+spacy>=3.0.0
 requests>=2.25.0
 torch>=1.7.0
 pyaudio>=0.2.11
 django-cors-headers>=3.7.0
 django-crispy-forms>=1.11.0
 django-bootstrap4>=1.1.0
-tailwindcss>=3.0.0  # You may need to adjust this if specific versions are needed
+tailwindcss>=3.0.0
 gsap>=3.5.1
 vanilla-tilt>=1.7.0
 font-awesome>=5.15.2
 
 # Optional dependencies
 loguru>=0.5.3  # For advanced logging, can replace logging
+
+# Notes: 
+# For spacy model:
+# After installing spacy, run the following command to install the language model:
+# python -m spacy download en_core_web_sm
