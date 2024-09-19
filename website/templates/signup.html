@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        :root {
+            --baseColor: #606468;
+        }
+
+        body {
+            background-color: #2a2a2a;
+            color: #eee;
+            font-family: "Open Sans", sans-serif;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            max-width: 20rem;
+            width: 100%;
+            margin: auto;
+            background-color: #3b4148;
+            border-radius: 0.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form__field {
+            margin-bottom: 1rem;
+        }
+
+        .form__label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #eee;
+        }
+
+        .form__input {
+            width: 92%;
+            align-self: center;
+            padding: 0.75rem;
+            border: none;
+            background-color: #434a52;
+            color: inherit;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+
+        .form__input:focus,
+        .form__input:hover {
+            background-color: #4b525a;
+            outline: none;
+        }
+
+        .form__submit {
+            width: 98%;
+            padding: 0.75rem;
+            border: none;
+            background-color: #bee3f8;
+            color: #211616;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form__submit:hover,
+        .form__submit:focus {
+            background-color: #9fd7f7;
+            outline: none;
+        }
+
+        .form__submit:active {
+            transform: scale(0.98);
+        }
+
+        .form__footer {
+            margin-top: 1rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .form__footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .form__messages {
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Style for individual error messages */
+.form__error {
+    color: #d8000c; /* Red text for error messages */
+    background-color: #2a2a2a; /* Dark background for contrast */
+    border: 1px solid #d8000c; /* Red border for emphasis */
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Style for individual success messages */
+.form__success {
+    color: #155724; /* Green text for success messages */
+    background-color: #d4edda; /* Light green background for success */
+    border: 1px solid #c3e6cb; /* Light green border for success */
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Optional: Add some spacing between messages */
+.form__message + .form__message {
+    margin-top: 10px;
+} 
+    </style>
+</head>
+<body>
+
+<div class="form">
+    <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+
+        {% if messages %}
+        <div class="form__messages">
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="form__error">{{ message }}</div>
+                {% elif message.tags == 'success' %}
+                    <div class="form__success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="form__field">
+            <label for="register__username" class="form__label">Username</label>
+            <input autocomplete="username" id="register__username" type="text" name="username" class="form__input" placeholder="Enter your username" required>
+        </div>
+        
+        <div class="form__field">
+            <label for="register__firstname" class="form__label">Username</label>
+            <input autocomplete="first name" id="register__firstname" type="text" name="firstname" class="form__input" placeholder="Enter your first name" required>
+        </div>
+
+        <div class="form__field">
+            <label for="register__lastname" class="form__label">Username</label>
+            <input autocomplete="last name" id="register__lastname" type="text" name="lastname" class="form__input" placeholder="Enter your last name" required>
+        </div>
+
+        <div class="form__field">
+            <label for="register__password" class="form__label">Password</label>
+            <input id="register__password" type="password" name="password" class="form__input" placeholder="Enter your password" required>
+        </div>
+
+        <div class="form__field">
+            <label for="register__confirm_password" class="form__label">Confirm Password</label>
+            <input id="register__confirm_password" type="password" name="confirm_password" class="form__input" placeholder="Confirm your password" required>
+        </div>
+
+        <div class="form__field">
+            <label for="register__email" class="form__label">Email</label>
+            <input autocomplete="email" id="register__email" type="email" name="email" class="form__input" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form__field">
+            <input type="submit" value="Register" class="form__submit">
+        </div>
+    </form>
+
+    <div class="form__footer">
+        Already a member? <a href="{% url 'login' %}">Log in here</a>
+    </div>
+</div>
+
+</body>
+</html>

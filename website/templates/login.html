@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+    <style>
+        :root {
+            --baseColor: #606468;
+            --iconFill: var(--baseColor);
+            --htmlFontSize: 100%;
+            --bodyBackgroundColor: #2a2a2a;
+            --bodyColor: var(--baseColor);
+            --bodyFontFamily: "Open Sans", sans-serif;
+            --bodyFontSize: 0.875rem;
+            --bodyFontWeight: 400;
+            --bodyLineHeight: 1.5;
+            --loginBorderRadus: 0.25rem;
+            --loginColor: #eee;
+            --loginInputBackgroundColor: #3b4148;
+            --loginInputHoverBackgroundColor: #434a52;
+            --loginLabelBackgroundColor: #363b41;
+            --loginSubmitBackgroundColor: #bee3f8;
+            --loginSubmitColor: #211616;
+            --loginSubmitHoverBackgroundColor: #bee3f8;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            box-sizing: border-box;
+            font-size: var(--htmlFontSize);
+        }
+        
+        body {
+            background-color: var(--bodyBackgroundColor);
+            color: var(--bodyColor);
+            font-family: var(--bodyFontFamily);
+            font-size: var(--bodyFontSize);
+            font-weight: var(--bodyFontWeight);
+            line-height: var(--bodyLineHeight);
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .align {
+            display: grid;
+            place-items: center;
+        }
+        
+        .grid {
+            inline-size: 90%;
+            margin-inline: auto;
+            max-inline-size: 20rem;
+        }
+        
+        .form {
+            display: grid;
+            gap: var(--formGap);
+        }
+        
+        .form input[type="password"],
+        .form input[type="username"],
+        .form input[type="submit"] {
+            inline-size: 100%;
+        }
+        
+        .form__field {
+            display: flex;
+        }
+        
+        .form__input {
+            flex: 1;
+        }
+        
+        .form__messages {
+            margin-bottom: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .form__error {
+            color: #d8000c;
+            background-color: #2a2a2a;
+            border: 1px solid #d8000c;
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .form__success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .form__message + .form__message {
+            margin-top: 10px;
+        }
+        
+        .login {
+            color: var(--loginColor);
+        }
+        
+        .login label,
+        .login input[type="username"],
+        .login input[type="password"],
+        .login input[type="submit"] {
+            border-radius: var(--loginBorderRadus);
+            padding: 1rem;
+        }
+        
+        .login label {
+            background-color: var(--loginLabelBackgroundColor);
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            padding-inline: 1.25rem;
+        }
+        
+        .login input[type="password"],
+        .login input[type="username"],
+        .login input[type="text"] {
+            background-color: var(--loginInputBackgroundColor);
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+        
+        .login input[type="password"]:focus,
+        .login input[type="password"]:hover,
+        .login input[type="username"]:focus,
+        .login input[type="username"]:hover {
+            background-color: var(--loginInputHoverBackgroundColor);
+        }
+        
+        .login input[type="submit"] {
+            background-color: var(--loginSubmitBackgroundColor);
+            color: var(--loginSubmitColor);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .login input[type="submit"]:focus,
+        .login input[type="submit"]:hover {
+            background-color: var(--loginSubmitHoverBackgroundColor);
+        }
+        
+        .text--center {
+            text-align: center;
+        }
+        
+        .hidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        
+        .icons {
+            display: none;
+        }
+        
+        .icon {
+            block-size: 1em;
+            display: inline-block;
+            fill: var(--iconFill);
+            inline-size: 1em;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="align">
+    <div class="grid">
+        {% if user.is_authenticated %}
+            <div class="form__messages">
+                <div class="form__success">You are already logged in</div>
+            </div>
+        {% else %} 
+            <form action="{% url 'login' %}" method="post" class="form login">
+                {% csrf_token %} 
+                
+                {% if messages %}
+                    <div class="form__messages">
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="form__error">{{ message }}</div>
+                            {% elif message.tags == 'success' %}
+                                <div class="form__success">{{ message }}</div>
+                                <a class="form__success" href="{% url 'user_home' %}">home page</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %} 
+                <div class="form__field">
+                    <label for="login__username">
+                        <svg class="icon"><use xlink:href="#icon-user"></use></svg>
+                        <span class="hidden">username</span>
+                    </label>
+                    <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+                </div>
+                <div class="form__field">
+                    <label for="login__password">
+                        <svg class="icon"><use xlink:href="#icon-lock"></use></svg>
+                        <span class="hidden">Password</span>
+                    </label>
+                    <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+                </div>
+                <div class="form__field">
+                    <input type="submit" value="Sign In">
+                </div>
+            </form>
+            <p class="text--center">Not a member? <a href="{% url 'signup' %}">Sign up now</a> <svg class="icon"><use xlink:href="#icon-arrow-right"></use></svg></p>
+        {% endif %}
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="icons">
+        <symbol id="icon-arrow-right" viewBox="0 0 1792 1792"><path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z" /></symbol>
+        <symbol id="icon-lock" viewBox="0 0 1792 1792"><path d="M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z" /></symbol>
+        <symbol id="icon-user" viewBox="0 0 1792 1792"><path d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 14 108 3.5 103.5z" /></symbol>
+    </svg>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

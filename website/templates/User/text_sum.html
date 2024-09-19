@@ -1,0 +1,32 @@
+{% extends 'User/base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Text summarization</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload & Summarize</button>
+    </form>
+
+    {% if summary %}
+        <div id="summary">
+            <h2>Summary:</h2>
+            <p>{{ summary }}</p>
+        </div>
+        
+        {% if key_points %}
+            <div class="key-points">
+                <h2>Key Points:</h2>
+                <ul>
+                {% for key, value in key_points.items %}
+                    <li><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

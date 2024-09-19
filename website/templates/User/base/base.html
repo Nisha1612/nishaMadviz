@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Services Dashboard for various machine learning models.">
+    <meta name="keywords" content="AI, Machine Learning, Dashboard, Text Summarization, Diabetes Detection, Heart Disease Analysis, Recommendation System, Brain Tumor">
+    <meta name="author" content="Your Name">
+    <title>{% block title %}AI Services Dashboard{% endblock %}</title>
+    
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="grid-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="menu-icon" onclick="toggleSidebar()" aria-label="Toggle Sidebar" aria-expanded="false">
+        <span class="material-icons-outlined">menu</span>
+      </div>
+      <div class="header-left">
+        <!-- <div class="search-bar">
+          <input type="text" placeholder="Search..." id="search-input" aria-label="Search input">
+          <button type="button" id="search-btn" aria-label="Search">
+            <span class="material-icons-outlined">search</span>
+          </button>
+        </div> -->
+      </div>
+      
+      <div class="header-right">
+        <div class="profile-dropdown">
+          <span class="material-icons-outlined" id="account-icon" aria-label="Account" aria-haspopup="true">account_circle</span>
+          <div class="dropdown-menu" id="dropdown-menu" aria-hidden="true">
+            <p>Profile</p>
+            <p>Logout</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar closed">
+      <div class="sidebar-title">
+        <div class="sidebar-brand">
+          <p>
+            <span class="material-icons-outlined">smart_toy</span> AI Services
+          </p>
+        </div>
+        <span class="material-icons-outlined" onclick="toggleSidebar()" aria-label="Close Sidebar">close</span>
+      </div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item">
+          <p>
+            <span class="material-icons-outlined">text_snippet</span> Text Summarization
+          </p>
+        </li>
+        <li class="sidebar-list-item">
+          <p>
+            <span class="material-icons-outlined">medical_services</span> Diabetes Detection
+          </p>
+        </li>
+        <li class="sidebar-list-item">
+          <p>
+            <span class="material-icons-outlined">favorite</span> Heart Disease Analysis
+          </p>               
+        </li>
+        <li class="sidebar-list-item">
+          <p>
+            <span class="material-icons-outlined">recommend</span> Recommendation System
+          </p>
+        </li>
+        <li class="sidebar-list-item">
+          <p>
+            <span class="material-icons-outlined">psychology</span> Brain Tumor Detection
+          </p>
+        </li>
+      </ul>
+    </aside>
+    <!-- End Sidebar -->
+
+    <!-- Main -->
+    <main class="main-container">
+      {% block content %}
+      <!-- Content will be injected here -->
+      {% endblock %}
+    </main>
+    <!-- End Main -->
+
+    <!-- Footer -->
+    <!-- Add footer content here if needed -->
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const gridContainer = document.querySelector('.grid-container');
+      const isOpen = !sidebar.classList.contains('closed');
+      
+      sidebar.classList.toggle('open', !isOpen);
+      sidebar.classList.toggle('closed', isOpen);
+
+      gridContainer.style.gridTemplateColumns = isOpen ? '0 1fr' : 'var(--sidebar-width) 1fr';
+      gridContainer.style.gridTemplateAreas = isOpen 
+        ? `"header header"
+           "main main"`
+        : `"header header"
+           "sidebar main"`; 
+
+      document.querySelector('.menu-icon').setAttribute('aria-expanded', !isOpen);
+    }
+
+    $(document).ready(function() {
+      $('#account-icon').on('click', function() {
+        $('#dropdown-menu').toggle();
+        $('#dropdown-menu').attr('aria-hidden', $('#dropdown-menu').is(':visible'));
+      });
+
+      $(window).on('click', function(event) {
+        if (!$(event.target).closest('#account-icon').length) {
+          $('#dropdown-menu').hide().attr('aria-hidden', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

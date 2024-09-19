@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* QuestionPage.css */
+
+:root {
+  --baseColor: #606468;
+  --iconFill: var(--baseColor);
+  --htmlFontSize: 100%;
+  --anchorColor: #eee;
+--bodyBackgroundColor: #2a2a2a;
+--bodyColor: var(--baseColor);
+--bodyFontFamily: "Open Sans";
+--bodyFontFamilyFallback: sans-serif;
+--bodyFontSize: 0.875rem;
+--bodyFontWeight: 400;
+--bodyLineHeight: 1.5;
+--loginBorderRadus: 0.25rem;
+  --loginColor: #eee;
+
+  --loginInputBackgroundColor: #3b4148;
+  --loginInputHoverBackgroundColor: #434a52;
+
+  --loginLabelBackgroundColor: #363b41;
+
+  --loginSubmitBackgroundColor: #bee3f8;
+  --loginSubmitColor: #211616;
+  --loginSubmitHoverBackgroundColor: #bee3f8;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: var(--htmlFontSize);
+}
+
+body {
+  background-color: var(--bodyBackgroundColor);
+  color: var(--bodyColor);
+  font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
+  font-size: var(--bodyFontSize);
+  font-weight: var(--bodyFontWeight);
+  line-height: var(--bodyLineHeight);
+  margin: 0;
+  min-block-size: 100vh;
+}
+
+.question-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+   
+}
+#question-title{
+    color: white;
+}
+
+#question-content{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+.questions-bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 4rem;
+    width: 80%;
+}
+
+.options-container {
+    display: flex;
+}
+
+.other {
+    background-color: var(--loginInputBackgroundColor);
+    color: #757575;
+    padding: 1rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f0f0f0; */
+    /* Use your preferred background color */
+    border-radius: 1rem;
+    /* Adjust border-radius as needed */
+    cursor: pointer;
+    text-decoration: none;
+   
+    /* Use your preferred text color */
+    transition: background-color 0.3s, transform 0.3s;
+ 
+    width: 100%;
+
+    &:hover {
+        background-color: #bee3f8; 
+        /* Use your preferred hover background color */
+        transform: scale(1.02);
+    }
+}
+
+.custom-link {
+    background-color: var(--loginInputBackgroundColor);
+    color: #757575;
+    padding: 1rem;
+    /* Adjust padding as needed */
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    align-items: center;
+
+    border-radius: 1.5rem;
+
+    cursor: pointer;
+    text-decoration: none;
+  
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    width: 250px;
+    height: 230px;
+
+    &:hover {
+        background-color: #bee3f8; 
+        /* Use your preferred hover background color */
+        transform: scale(1.02);
+    }
+}
+
+.selected {
+    outline: 2px solid black;
+    /* Add your preferred outline style */
+}
+
+#boy {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+#girl {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+#man {
+    width: 100px;
+    margin-bottom: 1rem;
+
+}
+
+#woman {
+    width: 140px;
+    margin-bottom: 1rem;
+}
+
+.review-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.review {
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review button {
+    margin-top: 1rem;
+}
+
+.pwd_err {
+    color: red;
+}
+
+.loading_title {
+    position: absolute;
+    top: 10rem;
+    font-size: 45px;
+}
+
+.loading_subtext {
+    position: absolute;
+    top: 15rem;
+    font-size: small;
+}
+
+.cyan-button {
+    background-color: cyan;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+
+    /* Cyan Button */
+.cyan-button {
+    background-color: #bee3f8;
+    color: #211616;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px; /* Add some margin between buttons */
+}
+/* Darker shade of cyan on hover */
+.cyan-button:hover {
+    background-color: #9dc7e0;
+}
+#answer-input{
+    background-color: var(--loginInputBackgroundColor);
+    border-radius: 10px;
+    
+    width: 90%;
+    height: 40px;
+}
+
+#answer-input:focus,
+#answer-input:hover {
+  color: var(--loginSubmitHoverBackgroundColor);
+}
+
+
+
+</style>
+    
+</head>
+<body>
+    <div class="question-page">
+        <h1 id="question-title"></h1>
+        <div id="question-content">
+
+        </div>
+
+        <div class="questions-bottom">
+            <div class="error-message" id="error-message"  style=" width: 100%; text-align: center;"></div>
+            <button id="back-button" class="cyan-button">Back</button>
+            <button id="next-button" class="cyan-button">Next</button>
+            
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: 'What is your gender?', type: 'options1', options: ['Male', 'Female'] },
+            { question: 'What is your age?', type: 'options2', options: ['I am older than 6 years old.', 'I am filling this out for a child younger than 6 years old.'] },
+            { question: 'Do you have any allergies? If so, please write them down.', type: 'text' },
+            { question: 'How do you want to improve your health or what health issues do you have?', type: 'text' }
+        ];
+
+        const answers = [];
+        let currentQuestionIndex = 0;
+
+        const questionTitle = document.getElementById('question-title');
+        const questionContent = document.getElementById('question-content');
+        const nextButton = document.getElementById('next-button');
+        const backButton = document.getElementById('back-button');
+
+        const errorMessage = document.getElementById('error-message');
+
+        const renderQuestion = () => {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionTitle.innerText = currentQuestion.question;
+            questionContent.innerHTML = '';
+
+            if (currentQuestion.type === 'text') {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = 'answer-input';
+                questionContent.appendChild(input);
+            } else if (currentQuestion.type.includes('options')) {
+                currentQuestion.options.forEach(option => {
+                    const div = document.createElement('div');
+                    div.className = 'custom-link option';
+                    div.innerText = option;
+                    div.onclick = () => selectOption(option);
+                    questionContent.appendChild(div);
+                });
+
+                if (currentQuestion.type === 'options1') {
+                    const otherDiv = document.createElement('div');
+                    otherDiv.className = 'other';
+                    otherDiv.innerText = 'Other';
+                    otherDiv.onclick = () => selectOption('Other');
+                    questionContent.appendChild(otherDiv);
+                }
+            }
+        };
+
+        const selectOption = (option) => {
+            const options = document.querySelectorAll('.option, .other');
+            options.forEach(opt => opt.classList.remove('selected'));
+            event.target.classList.add('selected');
+            document.getElementById('answer-input') && (document.getElementById('answer-input').value = option);
+        };
+
+        const handleNext = () => {
+            const currentQuestion = questions[currentQuestionIndex];
+            let answer;
+
+            if (currentQuestion.type === 'text') {
+                answer = document.getElementById('answer-input').value;
+            } else if (currentQuestion.type.includes('options')) {
+                answer = document.querySelector('.option.selected, .other.selected')?.innerText;
+            }
+
+            if (!answer) {
+                errorMessage.innerText = 'Please provide an answer.';
+                return;
+            }
+
+            errorMessage.innerText = '';
+            answers.push(answer);
+
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                handleSubmit();
+            }
+        };
+
+        const handleBack = () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        };
+
+        const handleSubmit = () => {
+            alert('Thank you for your answers: ' + JSON.stringify(answers));
+            // Handle submission logic here, such as sending data to a server
+        };
+
+        nextButton.onclick = handleNext;
+        backButton.onclick = handleBack;
+        renderQuestion();
+    </script>
+</body>
+</html>

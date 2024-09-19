@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Healthcare Team - MedViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0087b1;
+      --secondary-color: #f0f8ff;
+      --text-color: #333;
+      --text-light: #666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+    }
+
+    .outer-container {
+      padding: 50px 20px;
+    }
+
+    .inner-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-head-text {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-subhead-text {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 50px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-card {
+      background-color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .img-wrapper {
+      position: relative;
+      padding-top: 100%;
+      overflow: hidden;
+    }
+
+    .team-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .team-card:hover .team-img {
+      transform: scale(1.1);
+    }
+
+    .team-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 5px;
+    }
+
+    .position {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .social-media-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-media-links a {
+      color: var(--text-light);
+      font-size: 1.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-media-links a:hover {
+      color: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    .footer_section {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .section-head-text {
+        font-size: 2rem;
+      }
+
+      .section-subhead-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="outer-container">
+    <div class="inner-container">
+      <h1 class="section-head-text">Meet Our Team</h1>
+      <p class="section-subhead-text">
+        Dedicated professionals streamlining your journey from diagnosis to treatment with cutting-edge AI technology
+      </p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="img-wrapper">
+            <img class="team-img" src="{% static 'images/Ishita.jpeg' %}" alt="Ishita Grover">
+          </div>
+          <div class="team-info">
+            <h2 class="name">Ishita Grover</h2>
+            <p class="position">Team Lead</p>
+            <div class="social-media-links">
+              <a href="http://www.twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="http://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="http://www.github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="mailto:ishita@example.com" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="img-wrapper">
+            <img class="team-img" src="{% static 'images/Jasleen.jpeg' %}" alt="Jasleen Kaur">
+          </div>
+          <div class="team-info">
+            <h2 class="name">Jasleen Kaur</h2>
+            <p class="position">Data Scientist</p>
+            <div class="social-media-links">
+              <a href="http://www.twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="http://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="http://www.github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="mailto:jasleen@example.com" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="img-wrapper">
+            <img class="team-img" src="{% static 'images/Payal.jpeg' %}" alt="Payal Kashyap">
+          </div>
+          <div class="team-info">
+            <h2 class="name">Payal Kashyap</h2>
+            <p class="position">Data Analyst</p>
+            <div class="social-media-links">
+              <a href="http://www.twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="http://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="http://www.github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="mailto:payal@example.com" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="img-wrapper">
+            <img class="team-img" src="{% static 'images/Nisha.jpeg' %}" alt="Nisha Mudgil">
+          </div>
+          <div class="team-info">
+            <h2 class="name">Nisha Mudgil</h2>
+            <p class="position">UI/UX Designer</p>
+            <div class="social-media-links">
+              <a href="http://www.twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="http://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="http://www.github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="mailto:nisha@example.com" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer_section">
+    <div class="container">
+      <p>&copy; <span id="displayYear"></span> All Rights Reserved By Team-3 (MedViz)</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("displayYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

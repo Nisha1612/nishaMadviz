@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarize Medical Report</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+     <style>
+        body {
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #333;
+            border-radius: 8px;
+        }
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            text-align: center;
+            font-size: 24px;
+            padding-top: 20%;
+        }
+        .spinner {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 70px;
+            height: 80px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #summary, .key-points {
+            margin-top: 20px;
+            border: 1px solid #555;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #444;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        h1, h2 {
+            color: #3498db;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #2c3e50;
+            border-radius: 5px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style> 
+</head>
+<body>
+    <p>Template is working!</p>
+
+    <div class="container">
+        <h1>Medical Report Summary and Key Findings</h1>
+        
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form id="upload-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload & Summarize</button>
+        </form>
+
+        <p>Debug: Form is {{ form }}</p>
+        {% if summary %}
+        <p>Debug: Summary is {{ summary }}</p>
+        {% else %}
+        <p>Debug: No summary yet</p>
+        {% endif %}
+
+        <div id="loading" class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+
+        {% if summary %}
+            <div id="summary">
+                <h2>Summary:</h2>
+                <p>{{ summary }}</p>
+            </div>
+
+            {% if key_points %}
+                <div class="key-points">
+                    <h2>Key Points:</h2>
+                    <ul>
+                    {% for key, value in key_points.items %}
+                        <li><strong>{{ key }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            document.getElementById('loading').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
