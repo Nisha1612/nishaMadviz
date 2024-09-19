@@ -2,7 +2,7 @@
 asgiref==3.7.2
 asttokens==2.4.1
 astunparse==1.6.3
-json
+
 certifi==2023.7.22
 charset-normalizer==3.2.0
 cloudpathlib==0.19.0
