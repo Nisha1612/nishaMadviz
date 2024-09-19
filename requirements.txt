@@ -1,9 +1,26 @@
-Django>=4.2.4
-asgiref>=3.7.2
-dj-database-url>=2.1.0
-djangorestframework>=3.14.0
-gunicorn>=20.1.0
-psycopg2>=2.9.7
-python-decouple>=3.8
-sqlparse>=0.4.4
-whitenoise>=6.5.0
+Django>=3.2
+pandas>=1.1.5
+numpy>=1.19.5
+scikit-learn>=0.24.2
+pillow>=8.0.1
+joblib>=1.0.0
+opencv-python>=4.5.1.48
+tensorflow>=2.4.0
+speechrecognition>=3.8.1
+PyPDF2>=1.26.0
+transformers>=4.0.0
+spacy>=2.3.5
+fitz==0.0.1.dev2  # PyMuPDF wrapper
+requests>=2.25.0
+torch>=1.7.0
+pyaudio>=0.2.11
+django-cors-headers>=3.7.0
+django-crispy-forms>=1.11.0
+django-bootstrap4>=1.1.0
+tailwindcss>=3.0.0  # You may need to adjust this if specific versions are needed
+gsap>=3.5.1
+vanilla-tilt>=1.7.0
+font-awesome>=5.15.2
+
+# Optional dependencies
+loguru>=0.5.3  # For advanced logging, can replace logging
